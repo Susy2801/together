@@ -67,14 +67,14 @@ function Weather() {
                 data.current.wind_speed_10m + data.current_units.wind_speed_10m
               }`}
             </div>
-            <div className="status">
+            <div className="humidity">
               {`Độ ẩm 💧: ${
                 data.current.relative_humidity_2m +
                 data.current_units.relative_humidity_2m
               }`}
             </div>
             {data.current.rain > 0 && (
-              <div className="status">{`🌧️: ${
+              <div className="rain">{`🌧️: ${
                 data.current.rain + data.current_units.rain
               }`}</div>
             )}

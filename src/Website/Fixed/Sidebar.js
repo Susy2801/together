@@ -127,10 +127,15 @@ function SideBar() {
                   color: choose === "3" ? "white" : "rgba(255, 255, 255, 0.5)",
                 }}
               >
-                {" "}
                 Love
               </div>
             )}
+          </Link>
+        </div>
+        <div className="setting__box">
+          <Link className="setting__link">
+            <span class="fa-solid fa-gear nav__icon"></span>
+            {!isClose && <div className="nav__title"> Setting</div>}
           </Link>
         </div>
       </div>

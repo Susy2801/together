@@ -83,4 +83,20 @@ a {
 
 .nav__title {
   transition: 0.3s all ease;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.setting__box {
+  margin-left: 15px;
+  margin-top: 10px;
+  overflow: hidden;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.nav__icon:hover {
+  color: white;
+}
+
+.nav__title:hover {
+  color: white;
 }
