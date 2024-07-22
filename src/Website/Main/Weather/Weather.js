@@ -2,13 +2,20 @@ import "./Weather.css";
 import { useState, useEffect } from "react";
 
 function Weather() {
-  const api = `https://api.open-meteo.com/v1/forecast?latitude=21.0245&longitude=105.8412&current=temperature_2m,relative_humidity_2m,is_day&timezone=Asia%2FBangkok`;
   const [data, setData] = useState([]);
+  console.log(data);
+  const api =
+    "https://api.open-meteo.com/v1/forecast?latitude=21.0245&longitude=105.8412&current=temperature_2m,relative_humidity_2m,is_day&timezone=Asia%2FBangkok";
+
   useEffect(() => {
     const getStatus = async () => {
-      const response = await fetch(api);
-      setData(response);
-      console.log(data);
+      try {
+        const response = await fetch(api);
+        const status = await response.json();
+        setData(status);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     getStatus();
