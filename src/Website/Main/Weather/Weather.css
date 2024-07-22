@@ -5,6 +5,15 @@
   color: white;
 }
 
+.wea__container2 {
+  background-color: #1d2330;
+  height: 100vh;
+  flex: 1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .wea__box {
   padding: 100px;
   display: flex;
@@ -18,6 +27,9 @@
   padding: 20px;
   border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .status__img {
@@ -31,7 +43,31 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 0 20px;
   margin-top: 80px;
   margin-bottom: 20px;
+}
+
+.info__location {
+  color: rgb(0, 204, 255);
+}
+
+.info__temp {
+  color: rgba(255, 255, 255);
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #ffa516 94%, #0000) top/8px 8px
+      no-repeat,
+    conic-gradient(#0000 30%, #ffa516);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn);
+  }
 }

@@ -1,10 +1,32 @@
 import "./Sidebar.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 function SideBar() {
   const [width, setWidth] = useState("110px");
   const [isClose, setIsClose] = useState(true);
-  const [choose, setChoose] = useState("1");
+  const [choose, setChoose] = useState(null);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = location.pathname;
+    switch (path) {
+      case "/weather":
+        setChoose("2");
+        break;
+      // Các đường dẫn khác
+      case "/":
+        setChoose("1");
+        break;
+      case "/love":
+        setChoose("3");
+        break;
+      default:
+        // Hành động mặc định nếu không khớp đường dẫn nào
+        setChoose(0);
+    }
+  }, [location.pathname]); // Chạy mỗi khi đường dẫn thay đổi
 
   function handleBtn() {
     if (!isClose) {
@@ -53,12 +75,7 @@ function SideBar() {
         </div>
         <div className="sidebar__nav--box">
           <div className="nav__title">Main</div>
-          <Link
-            to="/"
-            onClick={() => {
-              setChoose("1");
-            }}
-          >
+          <Link to="/">
             <i
               class="fa-solid fa-house nav__icon"
               style={{
@@ -77,12 +94,7 @@ function SideBar() {
               </div>
             )}
           </Link>
-          <Link
-            to="/weather"
-            onClick={() => {
-              setChoose("2");
-            }}
-          >
+          <Link to="/weather">
             <i
               class="fa-solid fa-cloud-sun-rain nav__icon"
               style={{
@@ -101,12 +113,7 @@ function SideBar() {
               </div>
             )}
           </Link>
-          <Link
-            to="/love"
-            onClick={() => {
-              setChoose("3");
-            }}
-          >
+          <Link to="/love">
             <i
               class="fa-solid fa-heart nav__icon"
               style={{
