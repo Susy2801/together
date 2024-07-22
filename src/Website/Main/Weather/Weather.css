@@ -1,0 +1,37 @@
+.wea__container {
+  background-color: #1d2330;
+  height: 100vh;
+  flex: 1;
+  color: white;
+}
+
+.wea__box {
+  padding: 100px;
+  display: flex;
+}
+
+.box {
+  background-color: rgba(63, 62, 62, 0.295);
+  width: 200px;
+  height: 400px;
+  position: relative;
+  padding: 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.status__img {
+  width: 140px;
+  position: absolute;
+  top: -70px;
+  right: -40px;
+}
+
+.box__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  margin-top: 80px;
+  margin-bottom: 20px;
+}

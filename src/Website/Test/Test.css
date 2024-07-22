@@ -1,0 +1,123 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #2f3136;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.toggle-btn {
+  background-color: #2f3136;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.nav-main {
+  flex-grow: 1;
+}
+
+.nav-section h3 {
+  margin: 0;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #ccc;
+  text-transform: uppercase;
+}
+
+.nav-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-section li {
+  margin-bottom: 10px;
+}
+
+.nav-section a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.nav-section a:hover,
+.nav-section a:focus {
+  background-color: #3a3d42;
+}
+
+.nav-section .icon-dashboard,
+.nav-section .icon-audience,
+.nav-section .icon-posts,
+.nav-section .icon-schedules,
+.nav-section .icon-income,
+.nav-section .icon-settings {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  /* Thêm icon tương ứng ở đây */
+}
+
+.submenu {
+  display: none;
+  margin-left: 20px;
+}
+
+.nav-section li:hover .submenu,
+.nav-section li:focus-within .submenu {
+  display: block;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  background-color: #fff;
+  color: #000;
+}
+
+.sidebar.closed + .content {
+  margin-left: 0;
+}
