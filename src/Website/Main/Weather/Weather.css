@@ -110,7 +110,7 @@
   }
 }
 
-.wea__button--box {
+/* .wea__button--box {
   position: absolute;
   width: 250px;
   bottom: 25px;
@@ -120,8 +120,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+} */
 
+.wea__button--box {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
 .wea__btn {
   width: 120px;
   border: 1px solid rgba(255, 255, 255, 0.5);
