@@ -169,6 +169,7 @@ function Weather() {
             }}
             onClick={() => {
               setLocation("1");
+              setLoading(true);
             }}
           >
             Hà Nội
@@ -181,6 +182,7 @@ function Weather() {
             }}
             onClick={() => {
               setLocation("2");
+              setLoading(true);
             }}
           >
             Hồ Chí Minh
