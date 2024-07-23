@@ -133,7 +133,7 @@ function SideBar() {
           </Link>
         </div>
         <div className="setting__box">
-          <Link className="setting__link">
+          <Link to="/setting" className="setting__link">
             <span class="fa-solid fa-gear nav__icon"></span>
             {!isClose && <div className="nav__title"> Setting</div>}
           </Link>

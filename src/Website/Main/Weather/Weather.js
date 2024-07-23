@@ -2,89 +2,193 @@ import "./Weather.css";
 import { useState, useEffect } from "react";
 
 function Weather() {
-  const [data, setData] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const sunImg =
+    "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png";
+  const rainImg =
+    "https://cdn2.iconfinder.com/data/icons/weather-365/64/weather-sun-cloud-rain-512.png";
+  const heavyImg =
+    "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather06-512.png";
 
-  const params = {
-    latitude: 21.041,
-    longitude: 105.886,
-    current: [
-      "temperature_2m",
-      "relative_humidity_2m",
-      "is_day",
-      "rain",
-      "wind_speed_10m",
-    ],
-    hourly: "wind_speed_10m",
-    daily: "weather_code",
-    timezone: "Asia/Bangkok",
-  };
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+  const [status, setStatus] = useState(null);
+  const [daily, setDaily] = useState(null);
+  const [img, setImg] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const [location, setLocation] = useState("1");
+
   const api =
-    "https://api.open-meteo.com/v1/forecast?latitude=21.041&longitude=105.886&current=temperature_2m,relative_humidity_2m,is_day,rain,wind_speed_10m&hourly=wind_speed_10m&daily=weather_code&timezone=Asia%2FBangkok";
+    location === "1"
+      ? "https://api.open-meteo.com/v1/forecast?latitude=21.041&longitude=105.886&current=temperature_2m,relative_humidity_2m,is_day,rain,wind_speed_10m&hourly=wind_speed_10m&daily=weather_code&timezone=Asia%2FBangkok"
+      : "https://api.open-meteo.com/v1/forecast?latitude=10.823&longitude=106.6296&current=temperature_2m,relative_humidity_2m,rain,wind_speed_10m&timezone=Asia%2FBangkok";
+
+  const dailyApi =
+    location === "1"
+      ? "https://api.open-meteo.com/v1/forecast?latitude=21.0245&longitude=105.8412&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,wind_speed_10m_max&timezone=Asia%2FBangkok&forecast_days=3"
+      : "https://api.open-meteo.com/v1/forecast?latitude=10.823&longitude=106.6296&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,wind_speed_10m_max&timezone=Asia%2FBangkok&forecast_days=3";
+
+  const fetchData = async () => {
+    try {
+      const [currentData, dailyData] = await Promise.all([
+        fetch(api).then((res) => res.json()),
+        fetch(dailyApi).then((res) => res.json()),
+      ]);
+      setData(currentData);
+      setDaily(dailyData);
+
+      // Xử lý dữ liệu thời tiết hiện tại
+      const rain = currentData.current.rain;
+      if (rain === 0) {
+        setStatus("Nắng");
+        setImg(sunImg);
+      } else if (rain > 0 && rain < 1) {
+        setStatus("Mưa nhỏ");
+        setImg(rainImg);
+      } else if (rain > 1) {
+        setStatus("Mưa to");
+        setImg(heavyImg);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const getStatus = async () => {
-      try {
-        const response = await fetch(api);
-        const status = await response.json();
-        setData(status);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    fetchData();
+  }, [api, dailyApi]);
 
-    getStatus();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
-  if (isLoading) {
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${hours}:${minutes}`;
+  }
+
+  function formatDay(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
+
+  if (isLoading || !data || !daily) {
     return (
       <div className="wea__container2">
         <div className="loader"></div>
       </div>
     );
-  } else {
-    return (
-      <div className="wea__container">
-        <div className="wea__box">
-          <div className="box">
-            <img
-              src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png"
-              alt="Sun"
-              className="status__img"
-            />
+  }
+
+  return (
+    <div className="wea__container">
+      <div className="wea__box">
+        <div className="box">
+          <div className="wea__date">{date.toLocaleString()}</div>
+          <img src={img} alt="Weather" className="status__img" />
+          <div className="box__info">
+            <div className="info__location">
+              {location === "1" ? "Hà Nội" : "Hồ Chí Minh"}
+            </div>
+            <div className="info__temp">
+              {data.current.temperature_2m} {data.current_units.temperature_2m}
+            </div>
+          </div>
+          <div className="wind__speed">
+            {`Gió 🌪: ${data.current.wind_speed_10m} ${data.current_units.wind_speed_10m}`}
+          </div>
+          <div className="humidity">
+            {`Độ ẩm 💧: ${data.current.relative_humidity_2m} ${data.current_units.relative_humidity_2m}`}
+          </div>
+          {data.current.rain > 0 && (
+            <div className="rain">{`🌧️: ${data.current.rain} ${data.current_units.rain}`}</div>
+          )}
+          <div className="status">{status}</div>
+        </div>
+        {/* Daily */}
+        {daily.daily.time.map((time, index) => (
+          <div className="box" key={index}>
+            <div className="wea__date">{formatDay(time)}</div>
             <div className="box__info">
-              <div className="info__location">Hà Nội</div>
               <div className="info__temp">
-                {data.current.temperature_2m +
-                  data.current_units.temperature_2m}
+                {daily.daily.temperature_2m_min[index]}°C
+              </div>
+              <div>~</div>
+              <div className="info__temp">
+                {daily.daily.temperature_2m_max[index]}°C
               </div>
             </div>
-            <div className="wind__speed">
-              {`Gió 🌪 : ${
-                data.current.wind_speed_10m + data.current_units.wind_speed_10m
-              }`}
+            <div className="daily__uv-wind--box">
+              <div className="daily__status--box">
+                <i className="fa-solid fa-sun-plant-wilt"></i>
+                <div>{daily.daily.uv_index_max[index]}</div>
+              </div>
+              <div className="daily__status--box">
+                <i className="fa-solid fa-wind"></i>
+                <div>{daily.daily.wind_speed_10m_max[index]}km/h</div>
+              </div>
             </div>
-            <div className="humidity">
-              {`Độ ẩm 💧: ${
-                data.current.relative_humidity_2m +
-                data.current_units.relative_humidity_2m
-              }`}
+            <div className="daily__sun--box">
+              <div className="daily__status--box">
+                <i className="fa-solid fa-sun"></i>
+                <div className="daily__sun">
+                  {formatDate(daily.daily.sunrise[index])}
+                </div>
+              </div>
+              <div className="daily__status--box">
+                <i className="fa-solid fa-moon"></i>
+                <div className="daily__sun">
+                  {formatDate(daily.daily.sunset[index])}
+                </div>
+              </div>
             </div>
-            {data.current.rain > 0 && (
-              <div className="rain">{`🌧️: ${
-                data.current.rain + data.current_units.rain
-              }`}</div>
-            )}
-
-            <div className="status">Sunny</div>
+          </div>
+        ))}
+        {/* BUTTON */}
+        <div className="wea__button--box">
+          <div
+            className="wea__btn"
+            style={{
+              backgroundColor: location === "1" ? "white" : "",
+              color: location === "1" ? "black" : "white",
+            }}
+            onClick={() => {
+              setLocation("1");
+            }}
+          >
+            Hà Nội
+          </div>
+          <div
+            className="wea__btn"
+            style={{
+              backgroundColor: location === "2" ? "white" : "",
+              color: location === "2" ? "black" : "white",
+            }}
+            onClick={() => {
+              setLocation("2");
+            }}
+          >
+            Hồ Chí Minh
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Weather;
