@@ -16,11 +16,13 @@
 }
 .wea__box {
   width: 100%;
-  height: 100%;
-  padding: 80px;
+  height: 100vh;
+  padding: 100px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .box__now {
