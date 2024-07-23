@@ -124,13 +124,13 @@ function Weather() {
         <div className="daily__box">
           {daily.daily.time.slice(1).map((time, index) => (
             <div className="box" key={index}>
-              <div className="wea__date">{formatDay(time)}</div>
-              <div className="box__info">
-                <div className="info__temp">
+              <div className="daily__date">{formatDay(time)}</div>
+              <div className="daily__info">
+                <div className="min__temp daily__temp">
                   {daily.daily.temperature_2m_min[index + 1]}°C
                 </div>
                 <div>~</div>
-                <div className="info">
+                <div className="max__temp daily__temp">
                   {daily.daily.temperature_2m_max[index + 1]}°C
                 </div>
               </div>

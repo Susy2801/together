@@ -85,7 +85,6 @@
 
 .bottom__info span {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 16px;
 }
 
 .box__bottom {
@@ -151,27 +150,54 @@
   gap: 15px;
   font-size: small;
 }
-
+.daily__date {
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+}
 .daily__box {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.daily__uv-wind--box {
+.daily__info {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+.min__temp {
+  color: #16d0ff;
+}
+
+.max__temp {
+  color: orange;
+}
+
+.daily__uv-wind--box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .daily__status--box {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
+  justify-content: center;
 }
 
 .daily__sun--box {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.fa-sun {
+  color: orangered;
+}
+
+.fa-moon {
+  color: #44d3f7;
 }
