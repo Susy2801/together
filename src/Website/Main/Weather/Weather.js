@@ -166,7 +166,7 @@ function Weather() {
           <div
             className="wea__btn"
             style={{
-              backgroundColor: location === "1" ? "white" : "",
+              backgroundColor: location === "1" ? "#158dac" : "",
               color: location === "1" ? "black" : "white",
             }}
             onClick={() => {
@@ -181,7 +181,7 @@ function Weather() {
           <div
             className="wea__btn"
             style={{
-              backgroundColor: location === "2" ? "white" : "",
+              backgroundColor: location === "2" ? "#158dac" : "",
               color: location === "2" ? "black" : "white",
             }}
             onClick={() => {

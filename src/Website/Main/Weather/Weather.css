@@ -125,11 +125,11 @@
 .wea__button--box {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
 }
 .wea__btn {
   width: 120px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* border: 1px solid rgba(255, 255, 255, 0.5); */
   border-radius: 10px;
   text-align: center;
   padding: 7px 10px;
