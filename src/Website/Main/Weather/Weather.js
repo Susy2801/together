@@ -109,11 +109,13 @@ function Weather() {
             <div className="status">{status}</div>
 
             <div className="box__bottom">
-              <div className="wind__speed">
-                {`Gió 🌪: ${data.current.wind_speed_10m}km/h`}
+              <div className="bottom__info">
+                <div className="bottom__title">Gió 🌪</div>
+                <span>{` ${data.current.wind_speed_10m}km/h`}</span>
               </div>
-              <div className="humidity">
-                {`Độ ẩm 💧: ${data.current.relative_humidity_2m}%`}
+              <div className="bottom__info">
+                <div className="bottom__title">Độ ẩm 💧</div>
+                <span>{`${data.current.relative_humidity_2m}%`}</span>
               </div>
             </div>
           </div>

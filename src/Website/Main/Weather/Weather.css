@@ -72,6 +72,22 @@
   font-size: 30px;
 }
 
+.bottom__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.bottom__info {
+  font-size: 20px;
+}
+
+.bottom__info span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+}
+
 .box__bottom {
   display: flex;
   justify-content: space-evenly;
@@ -98,8 +114,9 @@
 .wea__button--box {
   position: absolute;
   width: 250px;
-  bottom: 30px;
+  bottom: 25px;
   left: 50%;
+  right: 50%;
   transform: translate(-50%, 0);
   display: flex;
   align-items: center;
