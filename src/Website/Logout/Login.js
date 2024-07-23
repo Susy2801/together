@@ -49,6 +49,7 @@ function Login() {
 
   function handleLogin() {
     localStorage.setItem("cookie", "123");
+    window.location.href = "/weather";
     alert(localStorage.getItem("cookie"));
   }
   return (
