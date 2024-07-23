@@ -24,8 +24,8 @@ function Weather() {
 
   const dailyApi =
     location === "1"
-      ? "https://api.open-meteo.com/v1/forecast?latitude=21.0245&longitude=105.8412&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,wind_speed_10m_max&timezone=Asia%2FBangkok&forecast_days=3"
-      : "https://api.open-meteo.com/v1/forecast?latitude=10.823&longitude=106.6296&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,wind_speed_10m_max&timezone=Asia%2FBangkok&forecast_days=3";
+      ? "https://api.open-meteo.com/v1/forecast?latitude=21.0245&longitude=105.8412&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,wind_speed_10m_max&timezone=Asia%2FBangkok&forecast_days=7"
+      : "https://api.open-meteo.com/v1/forecast?latitude=10.823&longitude=106.6296&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,wind_speed_10m_max&timezone=Asia%2FBangkok&forecast_days=7";
 
   const fetchData = async () => {
     try {
@@ -98,67 +98,70 @@ function Weather() {
   return (
     <div className="wea__container">
       <div className="wea__box">
-        <div className="box">
-          <div className="wea__date">{date.toLocaleString()}</div>
-          <img src={img} alt="Weather" className="status__img" />
-          <div className="box__info">
+        <div>
+          <div className="box__now">
+            <div className="wea__date">{date.toLocaleString()}</div>
+            <img src={img} alt="Weather" className="status__img" />
             <div className="info__location">
               {location === "1" ? "Hà Nội" : "Hồ Chí Minh"}
             </div>
             <div className="info__temp">
               {data.current.temperature_2m} {data.current_units.temperature_2m}
             </div>
+
+            <div className="wind__speed">
+              {`Gió 🌪: ${data.current.wind_speed_10m} ${data.current_units.wind_speed_10m}`}
+            </div>
+            <div className="humidity">
+              {`Độ ẩm 💧: ${data.current.relative_humidity_2m} ${data.current_units.relative_humidity_2m}`}
+            </div>
+            {data.current.rain > 0 && (
+              <div className="rain">{`🌧️: ${data.current.rain} ${data.current_units.rain}`}</div>
+            )}
+            <div className="status">{status}</div>
           </div>
-          <div className="wind__speed">
-            {`Gió 🌪: ${data.current.wind_speed_10m} ${data.current_units.wind_speed_10m}`}
-          </div>
-          <div className="humidity">
-            {`Độ ẩm 💧: ${data.current.relative_humidity_2m} ${data.current_units.relative_humidity_2m}`}
-          </div>
-          {data.current.rain > 0 && (
-            <div className="rain">{`🌧️: ${data.current.rain} ${data.current_units.rain}`}</div>
-          )}
-          <div className="status">{status}</div>
         </div>
         {/* Daily */}
-        {daily.daily.time.map((time, index) => (
-          <div className="box" key={index}>
-            <div className="wea__date">{formatDay(time)}</div>
-            <div className="box__info">
-              <div className="info__temp">
-                {daily.daily.temperature_2m_min[index]}°C
-              </div>
-              <div>~</div>
-              <div className="info__temp">
-                {daily.daily.temperature_2m_max[index]}°C
-              </div>
-            </div>
-            <div className="daily__uv-wind--box">
-              <div className="daily__status--box">
-                <i className="fa-solid fa-sun-plant-wilt"></i>
-                <div>{daily.daily.uv_index_max[index]}</div>
-              </div>
-              <div className="daily__status--box">
-                <i className="fa-solid fa-wind"></i>
-                <div>{daily.daily.wind_speed_10m_max[index]}km/h</div>
-              </div>
-            </div>
-            <div className="daily__sun--box">
-              <div className="daily__status--box">
-                <i className="fa-solid fa-sun"></i>
-                <div className="daily__sun">
-                  {formatDate(daily.daily.sunrise[index])}
+        <div className="daily__box">
+          {daily.daily.time.slice(1).map((time, index) => (
+            <div className="box" key={index}>
+              <div className="wea__date">{formatDay(time)}</div>
+              <div className="box__info">
+                <div className="info__temp">
+                  {daily.daily.temperature_2m_min[index + 1]}°C
+                </div>
+                <div>~</div>
+                <div className="info">
+                  {daily.daily.temperature_2m_max[index + 1]}°C
                 </div>
               </div>
-              <div className="daily__status--box">
-                <i className="fa-solid fa-moon"></i>
-                <div className="daily__sun">
-                  {formatDate(daily.daily.sunset[index])}
+              <div className="daily__uv-wind--box">
+                <div className="daily__status--box">
+                  <i className="fa-solid fa-sun-plant-wilt"></i>
+                  <div>{daily.daily.uv_index_max[index + 1]}</div>
+                </div>
+                <div className="daily__status--box">
+                  <i className="fa-solid fa-wind"></i>
+                  <div>{daily.daily.wind_speed_10m_max[index + 1]}km/h</div>
+                </div>
+              </div>
+              <div className="daily__sun--box">
+                <div className="daily__status--box">
+                  <i className="fa-solid fa-sun"></i>
+                  <div className="daily__sun">
+                    {formatDate(daily.daily.sunrise[index + 1])}
+                  </div>
+                </div>
+                <div className="daily__status--box">
+                  <i className="fa-solid fa-moon"></i>
+                  <div className="daily__sun">
+                    {formatDate(daily.daily.sunset[index + 1])}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         {/* BUTTON */}
         <div className="wea__button--box">
           <div
