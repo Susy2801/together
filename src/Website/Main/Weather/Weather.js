@@ -1,5 +1,5 @@
-import "./Weather.css";
 import { useState, useEffect } from "react";
+import "./Weather.css";
 
 function Weather() {
   const sunImg =

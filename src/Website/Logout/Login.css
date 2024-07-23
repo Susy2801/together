@@ -1,0 +1,9 @@
+.login__container {
+  background-color: rgb(177, 177, 177);
+  width: 100%;
+}
+
+.form {
+  padding: 100px;
+  width: 600px;
+}

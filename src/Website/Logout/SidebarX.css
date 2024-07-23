@@ -50,6 +50,7 @@
 .sidebar__info--box img {
   width: 70px;
   height: 70px;
+  object-fit: cover;
   border-radius: 50%;
 }
 
@@ -98,5 +99,36 @@ a {
 }
 
 .nav__title:hover {
+  color: white;
+}
+
+.login__box {
+  display: flex;
+  gap: 5px;
+  margin-left: 25px;
+  margin-top: 20px;
+  overflow: hidden;
+  white-space: nowrap; /* Prevent text wrapping */
+  align-items: center;
+  cursor: pointer;
+}
+
+.login__box i {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 22px;
+  width: 30px;
+  transition: 0.3s all ease;
+}
+
+.login__title {
+  color: rgba(255, 255, 255, 0.5);
+  transition: 0.3s all ease;
+}
+
+.login__box:hover > .fa-user {
+  color: white;
+}
+
+.login__box:hover > .login__title {
   color: white;
 }

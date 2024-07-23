@@ -3,6 +3,8 @@ import "./Love.css";
 
 function Love() {
   const [timeLeft, setTimeLeft] = useState("");
+  const [timeLeft2, setTimeLeft2] = useState("");
+
   function dayBetween(dateString) {
     const givenDate = new Date(dateString);
     const currentDate = new Date();
@@ -15,7 +17,7 @@ function Love() {
   }
 
   function timeUntil100(dateString) {
-    const givenDate = new Date("2024/6/5");
+    const givenDate = new Date(dateString);
     const currentDate = new Date();
 
     const targetDate = new Date(givenDate);
@@ -39,12 +41,53 @@ function Love() {
     return `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
   }
 
-  function daysUntil365(dateString) {
-    const daysElapsed = dayBetween(dateString);
-    const daysRemaining = 365 - daysElapsed;
+  // function daysUntil365(dateString) {
+  //   const daysElapsed = dayBetween(dateString);
+  //   const daysRemaining = 365 - daysElapsed;
 
-    return daysRemaining > 0 ? daysRemaining : 0;
+  //   return daysRemaining > 0 ? daysRemaining : 0;
+  // }
+
+  function timeUntil365(dates) {
+    const givenDate = new Date(dates);
+    const currentDate = new Date();
+
+    if (isNaN(givenDate)) {
+      return "Ngày không hợp lệ";
+    }
+
+    const targetDate = new Date(givenDate);
+    targetDate.setDate(givenDate.getDate() + 365);
+
+    const differenceInTime = targetDate.getTime() - currentDate.getTime();
+
+    if (differenceInTime <= 0) {
+      return "Đã qua 365 ngày";
+    }
+
+    const days = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    const hours = Math.floor(
+      (differenceInTime % (1000 * 3600 * 24)) / (1000 * 3600)
+    );
+    const minutes = Math.floor(
+      (differenceInTime % (1000 * 3600)) / (1000 * 60)
+    );
+    const seconds = Math.floor((differenceInTime % (1000 * 60)) / 1000);
+
+    return `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
   }
+
+  useEffect(() => {
+    function updateCountdown() {
+      const timeLeft = timeUntil365("2024/6/5");
+      setTimeLeft2(timeLeft);
+    }
+
+    updateCountdown();
+    const intervalId = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     function updateCountdown() {
@@ -88,17 +131,15 @@ function Love() {
                 <div className="left__text"> ️🎉 Love for 100 days </div>
               </div>
               <div className="mission__right">
-                <div className="progress">{timeLeft}</div>
+                <div className="progress__bar">{timeLeft}</div>
               </div>
             </div>
             <div className="missions">
               <div className="mission__left">
-                <div className="left__text"> ️🎉 Love for 365 days </div>
+                <div className="left__text"> ️🎉 1 Year Anniversary 🎉 </div>
               </div>
               <div className="mission__right">
-                <div className="progress">
-                  {daysUntil365("2024/6/5")} days left
-                </div>
+                <div className="progress__bar">{timeLeft2} </div>
               </div>
             </div>
           </div>

@@ -1,7 +1,8 @@
-import "./Sidebar.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "./Sidebar.css";
+
 function SideBar() {
   const [width, setWidth] = useState("110px");
   const [isClose, setIsClose] = useState(true);
@@ -55,7 +56,7 @@ function SideBar() {
     >
       <div className="sidebar__box">
         <button
-          className="btn"
+          className="btnn"
           onClick={() => {
             handleBtn();
           }}
