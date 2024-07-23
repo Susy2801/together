@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./Love.css";
 
 function Love() {
+  const [timeLeft, setTimeLeft] = useState("");
   function dayBetween(dateString) {
     const givenDate = new Date(dateString);
     const currentDate = new Date();
@@ -13,18 +14,49 @@ function Love() {
     return differenceInDays;
   }
 
-  function daysUntil100(dateString) {
-    const daysElapsed = dayBetween(dateString);
-    const daysRemaining = 100 - daysElapsed;
+  function timeUntil100(dateString) {
+    const givenDate = new Date("2024/6/5");
+    const currentDate = new Date();
 
-    return daysRemaining > 0 ? daysRemaining : 0;
+    const targetDate = new Date(givenDate);
+    targetDate.setDate(givenDate.getDate() + 100);
+
+    const differenceInTime = targetDate.getTime() - currentDate.getTime();
+
+    if (differenceInTime <= 0) {
+      return "Đã qua 100 ngày";
+    }
+
+    const days = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    const hours = Math.floor(
+      (differenceInTime % (1000 * 3600 * 24)) / (1000 * 3600)
+    );
+    const minutes = Math.floor(
+      (differenceInTime % (1000 * 3600)) / (1000 * 60)
+    );
+    const seconds = Math.floor((differenceInTime % (1000 * 60)) / 1000);
+
+    return `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
   }
+
   function daysUntil365(dateString) {
     const daysElapsed = dayBetween(dateString);
     const daysRemaining = 365 - daysElapsed;
 
     return daysRemaining > 0 ? daysRemaining : 0;
   }
+
+  useEffect(() => {
+    function updateCountdown() {
+      const timeLeft = timeUntil100("2024/6/5");
+      setTimeLeft(timeLeft);
+    }
+
+    updateCountdown();
+    const intervalId = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="love__container">
@@ -41,7 +73,7 @@ function Love() {
               />
               <div className="days">{dayBetween("2024/6/5")}</div>
               <img
-                src="https://preview.redd.it/tried-to-make-an-anime-like-version-of-my-avatar-using-a-i-v0-2dmjoo8g1g5a1.jpg?width=1080&crop=smart&auto=webp&s=d347a673b742e4c2bad3e00085ee7fdb141b1fa2"
+                src="https://scontent.xx.fbcdn.net/v/t1.15752-9/450757883_1038928704461814_5189994303269445111_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_ohc=7QRTpeRcWG0Q7kNvgGH4pxa&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QG0mnprzJSrob5H3nsox35seuSEVUEzXLEz490tT3GIDA&oe=66C724CA"
                 alt="avatar"
                 className="count__avatar"
               />
@@ -56,9 +88,7 @@ function Love() {
                 <div className="left__text"> ️🎉 Love for 100 days </div>
               </div>
               <div className="mission__right">
-                <div className="progress">
-                  {daysUntil100("2024/5/6")} days left
-                </div>
+                <div className="progress">{timeLeft}</div>
               </div>
             </div>
             <div className="missions">
