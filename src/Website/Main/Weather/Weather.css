@@ -60,6 +60,9 @@
   margin-bottom: 20px;
 }
 
+.status {
+  color: rgb(233, 84, 253);
+}
 .info__location {
   color: rgb(0, 204, 255);
 }
