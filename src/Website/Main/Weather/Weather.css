@@ -33,7 +33,7 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
 }
 
 .wea__date {
@@ -52,7 +52,9 @@
 }
 
 .status {
-  color: rgb(233, 84, 253);
+  color: rgba(170, 170, 170, 0.692);
+  text-align: center;
+  font-size: 13px;
 }
 .info__location {
   color: rgb(0, 204, 255);
@@ -68,6 +70,13 @@
   color: rgba(255, 255, 255);
   text-align: center;
   font-size: 30px;
+}
+
+.box__bottom {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
 }
 
 .loader {

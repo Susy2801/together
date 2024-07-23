@@ -39,13 +39,13 @@ function Weather() {
       // Xử lý dữ liệu thời tiết hiện tại
       const rain = currentData.current.rain;
       if (rain === 0) {
-        setStatus("Nắng");
+        setStatus("Trời nắng");
         setImg(sunImg);
       } else if (rain > 0 && rain < 1) {
         setStatus("Mưa nhỏ");
         setImg(rainImg);
-      } else if (rain > 1) {
-        setStatus("Mưa to");
+      } else if (rain >= 1) {
+        setStatus("Mưa rào");
         setImg(heavyImg);
       }
     } catch (error) {
@@ -105,20 +105,17 @@ function Weather() {
             <div className="info__location">
               {location === "1" ? "Hà Nội" : "Hồ Chí Minh"}
             </div>
-            <div className="info__temp">
-              {data.current.temperature_2m} {data.current_units.temperature_2m}
-            </div>
-
-            <div className="wind__speed">
-              {`Gió 🌪: ${data.current.wind_speed_10m} ${data.current_units.wind_speed_10m}`}
-            </div>
-            <div className="humidity">
-              {`Độ ẩm 💧: ${data.current.relative_humidity_2m} ${data.current_units.relative_humidity_2m}`}
-            </div>
-            {data.current.rain > 0 && (
-              <div className="rain">{`🌧️: ${data.current.rain} ${data.current_units.rain}`}</div>
-            )}
+            <div className="info__temp">{data.current.temperature_2m}°C</div>
             <div className="status">{status}</div>
+
+            <div className="box__bottom">
+              <div className="wind__speed">
+                {`Gió 🌪: ${data.current.wind_speed_10m}km/h`}
+              </div>
+              <div className="humidity">
+                {`Độ ẩm 💧: ${data.current.relative_humidity_2m}%`}
+              </div>
+            </div>
           </div>
         </div>
         {/* Daily */}
@@ -171,8 +168,10 @@ function Weather() {
               color: location === "1" ? "black" : "white",
             }}
             onClick={() => {
-              setLocation("1");
-              setLoading(true);
+              if (location !== "1") {
+                setLocation("1");
+                setLoading(true);
+              }
             }}
           >
             Hà Nội
@@ -184,8 +183,10 @@ function Weather() {
               color: location === "2" ? "black" : "white",
             }}
             onClick={() => {
-              setLocation("2");
-              setLoading(true);
+              if (location !== "2") {
+                setLocation("2");
+                setLoading(true);
+              }
             }}
           >
             Hồ Chí Minh
