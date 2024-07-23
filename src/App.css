@@ -2,3 +2,22 @@
   display: flex;
   width: 100%;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #b33d62;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #834070;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #da3d58;
+}
