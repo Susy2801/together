@@ -7,6 +7,8 @@ function SideBar() {
   const [width, setWidth] = useState("110px");
   const [isClose, setIsClose] = useState(true);
   const [choose, setChoose] = useState(null);
+  const [avatar, setAvatar] = useState("");
+  const [name, setName] = useState("");
 
   const location = useLocation();
 
@@ -28,6 +30,32 @@ function SideBar() {
         setChoose(0);
     }
   }, [location.pathname]); // Chạy mỗi khi đường dẫn thay đổi
+
+  useEffect(() => {
+    async function getProfile() {
+      const api = "http://localhost:5000/profile";
+      const body = {
+        user_name: localStorage.getItem("data1"),
+        password: localStorage.getItem("data2"),
+      };
+      try {
+        const response = await fetch(api, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        const data = await response.json();
+        console.log(data);
+        setAvatar(data.response.avatar);
+        setName(data.response.nick_name);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getProfile();
+  }, []);
 
   function handleBtn() {
     if (!isClose) {
@@ -67,12 +95,10 @@ function SideBar() {
             <i class="fa-solid fa-angle-left close__btn"></i>
           )}
         </button>
+
         <div className="sidebar__info--box">
-          <img
-            src="https://img.freepik.com/free-photo/rendering-bee-anime-character_23-2150963632.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721433600&semt=ais_user"
-            alt="avatar"
-          />
-          {!isClose && <div className="info__name">Trần Diễm Quỳnh</div>}
+          <img src={avatar} alt="avatar" />
+          {!isClose && <div className="info__name">{name}</div>}
         </div>
         <div className="sidebar__nav--box">
           <div className="nav__title">Main</div>

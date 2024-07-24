@@ -3,55 +3,56 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.css";
 
 function Login() {
-  //   function handleLogin() {
-  //     alert();
-  //   }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
-  //   const handleLogin = async (event) => {
-  //     event.preventDefault();
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    const api = "https://susy-server.vercel.app/signin";
 
-  //     const api = "https://susy-server.vercel.app/login";
+    const data = {
+      user_name: email,
+      password: password,
+    };
 
-  //     const data = {
-  //       user_name: email,
-  //       password: password,
-  //     };
+    try {
+      // Send POST request
+      const response = await fetch(api, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-  //     try {
-  //       // Send POST request
-  //       const response = await fetch(api, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json", // Specify content type
-  //         },
-  //         body: JSON.stringify(data), // Convert data to JSON
-  //       });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
+      // Parse the JSON response
+      const result = await response.json();
 
-  //       // Parse the JSON response
-  //       const result = await response.json();
+      console.log("Login successful:", result);
 
-  //       // Handle the result here (e.g., display a message or redirect)
-  //       console.log("Login successful:", result);
+      if (result.message) {
+        localStorage.setItem("data1", email);
+        localStorage.setItem("data2", password);
+        localStorage.setItem("cookie", "1");
+        setLoading(false);
+        setInterval((window.location.href = "/"), 3000);
+      } else {
+        setLoading(false);
+        setCheck(result.message);
+        console.log("ĐĂNG NHẬP THẤT BẠI");
+      }
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  };
 
-  //       // Example: Redirect to another page
-  //       // window.location.href = '/dashboard';
-  //     } catch (error) {
-  //       console.error("There was a problem with the fetch operation:", error);
-  //     }
-  //   };
-
-  function handleLogin() {
-    localStorage.setItem("cookie", "123");
-    window.location.href = "/weather";
-    alert(localStorage.getItem("cookie"));
-  }
   return (
     <div className="login__container">
       <div className="container form">
@@ -65,12 +66,14 @@ function Login() {
               className="form-control"
               id="exampleInputEmail1"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setCheck(true);
+              }}
               aria-describedby="emailHelp"
+              required
             />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
-            </div>
+            <div id="emailHelp" className="form-text"></div>
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">
@@ -81,7 +84,11 @@ function Login() {
               className="form-control"
               id="exampleInputPassword1"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setCheck(true);
+              }}
+              required
             />
           </div>
 
@@ -89,6 +96,13 @@ function Login() {
             Submit
           </button>
         </form>
+        {isLoading && <div class="loader"></div>}
+
+        {!check && (
+          <div class="alert alert-danger mt-4" role="alert">
+            Sai tên đăng nhập hoặc mật khẩu!
+          </div>
+        )}
       </div>
     </div>
   );

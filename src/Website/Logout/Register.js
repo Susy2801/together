@@ -47,6 +47,7 @@ function Register() {
       setPassword("");
     }
   };
+
   return (
     <div className="login__container">
       <div className="container form">
@@ -63,10 +64,9 @@ function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               aria-describedby="emailHelp"
+              required
             />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
-            </div>
+            <div id="emailHelp" className="form-text"></div>
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputPassword1" className="form-label">
@@ -78,6 +78,7 @@ function Register() {
               id="exampleInputPassword1"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
 
