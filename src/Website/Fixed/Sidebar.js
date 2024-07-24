@@ -33,7 +33,7 @@ function SideBar() {
 
   useEffect(() => {
     async function getProfile() {
-      const api = "http://localhost:5000/profile";
+      const api = "https://susy-server.vercel.app/profile";
       const body = {
         user_name: localStorage.getItem("data1"),
         password: localStorage.getItem("data2"),
@@ -98,7 +98,11 @@ function SideBar() {
 
         <div className="sidebar__info--box">
           <img src={avatar} alt="avatar" />
-          {!isClose && <div className="info__name">{name}</div>}
+          {!isClose && (
+            <div className="info__name">
+              {name == undefined ? "Chưa có tên" : name}
+            </div>
+          )}
         </div>
         <div className="sidebar__nav--box">
           <div className="nav__title">Main</div>

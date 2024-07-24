@@ -21,7 +21,7 @@ function Setting() {
 
   async function updateName(name, event) {
     event.preventDefault();
-    const api = "http://localhost:5000/profile/name";
+    const api = "https://susy-server.vercel.app/profile/name";
     const body = {
       user_name: localStorage.getItem("data1"),
       password: localStorage.getItem("data2"),
@@ -40,7 +40,7 @@ function Setting() {
   }
 
   async function updateAvatar(avatar) {
-    const api = "http://localhost:5000/profile/avatar";
+    const api = "https://susy-server.vercel.app/profile/avatar";
     const body = {
       user_name: localStorage.getItem("data1"),
       password: localStorage.getItem("data2"),
