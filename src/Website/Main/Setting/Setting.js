@@ -27,16 +27,19 @@ function Setting() {
       password: localStorage.getItem("data2"),
       nick_name: name,
     };
-
-    const response = await fetch(api, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-
-    console.log("XONG");
+    try {
+      const response = await fetch(api, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      window.location.reload();
+    }
   }
 
   async function updateAvatar(avatar) {
@@ -46,14 +49,19 @@ function Setting() {
       password: localStorage.getItem("data2"),
       avatar: avatar,
     };
-
-    const response = await fetch(api, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    try {
+      const response = await fetch(api, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      window.location.reload();
+    }
   }
 
   // Hàm xử lý upload ảnh
