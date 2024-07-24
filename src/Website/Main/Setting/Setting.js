@@ -101,54 +101,58 @@ function Setting() {
     }
   };
   return (
-    <div>
-      <form className="container mt-5 ">
-        <div className="mb-3 ">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Cập nhật ảnh đại diện
-          </label>
-          <input
-            type="file"
-            className="form-control"
-            id="image"
-            onChange={(e) => setImg(e.target.files[0])}
-            aria-describedby="emailHelp"
-          />
-        </div>
-        <button
-          className="btn-primary btn"
-          onClick={(e) => {
-            uploadImg(e);
-          }}
-        >
-          Submit
-        </button>
-      </form>
+    <div className="setting__container ">
+      <div className="avatar container">
+        <form className=" mt-5 ">
+          <div className="mb-3 ">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Cập nhật ảnh đại diện
+            </label>
+            <input
+              type="file"
+              className="form-control"
+              id="image"
+              onChange={(e) => setImg(e.target.files[0])}
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <button
+            className="btn-primary btn"
+            onClick={(e) => {
+              uploadImg(e);
+            }}
+          >
+            Submit
+          </button>
+        </form>
+      </div>
 
-      <form className="container mt-5 ">
-        <div className="mb-3 ">
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Cập nhật tên
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="image"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            aria-describedby="emailHelp"
-          />
-        </div>
-        <button
-          className="btn-primary btn"
-          onClick={(e) => {
-            updateName(name, e);
-          }}
-        >
-          Submit
-        </button>
-      </form>
-      <div className="container mt-5">
+      <div className="avatar container">
+        <form className="mt-5 ">
+          <div className="mb-3 ">
+            <label htmlFor="exampleInputEmail1" className="form-label">
+              Cập nhật tên
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="image"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <button
+            className="btn-primary btn"
+            onClick={(e) => {
+              updateName(name, e);
+            }}
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div className="logout mt-5">
         <button className="btn btn-primary " onClick={logout}>
           Đăng Xuất
         </button>

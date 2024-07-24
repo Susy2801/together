@@ -1,0 +1,14 @@
+.setting__container {
+  background-color: #1d2330;
+  height: 100vh;
+  flex: 1;
+  color: white;
+}
+
+.avatar {
+  width: 500px;
+}
+
+.logout {
+  text-align: center;
+}
