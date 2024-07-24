@@ -38,8 +38,8 @@ function SideBar() {
     async function getProfile() {
       const api = "https://susy-server.vercel.app/profile";
       const body = {
-        user_name: localStorage.getItem("data1"),
-        password: localStorage.getItem("data2"),
+        user_name: sessionStorage.getItem("data1"),
+        password: sessionStorage.getItem("data2"),
       };
       try {
         const response = await fetch(api, {

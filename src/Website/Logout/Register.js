@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./Register.css";
 
 function Register() {
@@ -51,7 +51,7 @@ function Register() {
   return (
     <div className="login__container">
       <div className="container form">
-        <h1> ĐĂNG KÍ</h1>
+        <h1> Đăng Ký</h1>
         <form onSubmit={handleRegister}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">

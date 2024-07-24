@@ -1,16 +1,13 @@
-.login__container {
+.alert__container {
   background-color: #1d2330;
   height: 100vh;
   flex: 1;
   color: white;
+  position: relative;
 }
 
-.form {
-  padding: 100px;
-  width: 600px;
-}
-
-.load__ani {
+.alert__box {
   display: flex;
   justify-content: center;
+  margin-top: 25%;
 }

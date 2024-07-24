@@ -53,11 +53,11 @@ function SideBarX() {
         </div>
         <Link to="/login" className="login__box">
           <i class="fa-solid fa-user"></i>
-          {!isClose && <div className="login__title"> Login </div>}
+          {!isClose && <div className="login__title"> Đăng nhập </div>}
         </Link>
         <Link to="/register" className="login__box">
           <i class="fa-solid fa-user-plus"></i>
-          {!isClose && <div className="login__title"> Register </div>}
+          {!isClose && <div className="login__title"> Đăng ký </div>}
         </Link>
       </div>
     </div>

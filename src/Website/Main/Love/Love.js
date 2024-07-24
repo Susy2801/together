@@ -4,6 +4,10 @@ import "./Love.css";
 function Love() {
   const [timeLeft, setTimeLeft] = useState("");
   const [timeLeft2, setTimeLeft2] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [name, setName] = useState("");
+  const [partnerAvatar, setPartnerAvatar] = useState("");
+  const [partnerName, setPartnerName] = useState("");
 
   function dayBetween(dateString) {
     const givenDate = new Date(dateString);
@@ -41,13 +45,6 @@ function Love() {
     return `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
   }
 
-  // function daysUntil365(dateString) {
-  //   const daysElapsed = dayBetween(dateString);
-  //   const daysRemaining = 365 - daysElapsed;
-
-  //   return daysRemaining > 0 ? daysRemaining : 0;
-  // }
-
   function timeUntil365(dates) {
     const givenDate = new Date(dates);
     const currentDate = new Date();
@@ -76,6 +73,58 @@ function Love() {
 
     return `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
   }
+
+  useEffect(() => {
+    async function getProfile() {
+      const api = "https://susy-server.vercel.app/profile";
+      const body = {
+        user_name: sessionStorage.getItem("data1"),
+        password: sessionStorage.getItem("data2"),
+      };
+      try {
+        const response = await fetch(api, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        const data = await response.json();
+        console.log(data);
+        sessionStorage.setItem("partner", data.response.partner_id);
+        setAvatar(data.response.avatar);
+        setName(data.response.nick_name);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getProfile();
+  }, []);
+
+  useEffect(() => {
+    async function getPartner() {
+      const api = "https://susy-server.vercel.app/profile/get_partner";
+      const body = {
+        partner_id: sessionStorage.getItem("partner"),
+      };
+      try {
+        const response = await fetch(api, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        const data = await response.json();
+        setPartnerAvatar(data.response.avatar);
+        setPartnerName(data.response.nick_name);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getPartner();
+  }, [sessionStorage.getItem("partner")]);
 
   useEffect(() => {
     function updateCountdown() {
@@ -108,21 +157,21 @@ function Love() {
           <div className="count__day">
             <div className="count__title"> BEEN LOVE</div>
             <div className="count__info">
-              <div>Trần Diễm Quỳnh</div>
-              <img
-                src="https://cellphones.com.vn/sforum/wp-content/uploads/2024/01/avartar-anime-6.jpg"
-                alt="avatar"
-                className="count__avatar"
-              />
+              <div className="left__info">
+                <div>{name}</div>
+                <img src={avatar} alt="avatar" className="count__avatar" />
+              </div>
               <div className="days">{dayBetween("2024/6/5")}</div>
-              <img
-                src="https://scontent.xx.fbcdn.net/v/t1.15752-9/450757883_1038928704461814_5189994303269445111_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_ohc=7QRTpeRcWG0Q7kNvgGH4pxa&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_Q7cD1QG0mnprzJSrob5H3nsox35seuSEVUEzXLEz490tT3GIDA&oe=66C724CA"
-                alt="avatar"
-                className="count__avatar"
-              />
-              <div>Nguyễn Việt Duy</div>
+              <div className="right__info">
+                <img
+                  src={partnerAvatar}
+                  alt="avatar"
+                  className="count__avatar"
+                />
+                <div>{partnerName}</div>
+              </div>
             </div>
-            <div className="days__text">Day</div>
+            <div className="days__text">Days</div>
             <div className="days__date">From 5/6/2024</div>
           </div>
           <div className="mission__box">

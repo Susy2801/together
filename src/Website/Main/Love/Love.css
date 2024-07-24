@@ -53,6 +53,21 @@
   gap: 50px;
 }
 
+.left__info {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 35px;
+}
+
+.right__info {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
 .days__text {
   text-align: center;
   font-size: 14px;
@@ -60,6 +75,7 @@
 
 .days__date {
   text-align: center;
+  font-size: 13px;
 }
 
 /* Mission */

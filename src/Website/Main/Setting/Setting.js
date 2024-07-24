@@ -15,7 +15,10 @@ function Setting() {
   const [name, setName] = useState();
 
   function logout() {
-    localStorage.removeItem("cookie");
+    sessionStorage.removeItem("cookie");
+    sessionStorage.removeItem("data1");
+    sessionStorage.removeItem("data2");
+    sessionStorage.removeItem("is_admin");
     window.location.href = "/login";
   }
 
@@ -23,8 +26,8 @@ function Setting() {
     event.preventDefault();
     const api = "https://susy-server.vercel.app/profile/name";
     const body = {
-      user_name: localStorage.getItem("data1"),
-      password: localStorage.getItem("data2"),
+      user_name: sessionStorage.getItem("data1"),
+      password: sessionStorage.getItem("data2"),
       nick_name: name,
     };
     try {
@@ -45,8 +48,8 @@ function Setting() {
   async function updateAvatar(avatar) {
     const api = "https://susy-server.vercel.app/profile/avatar";
     const body = {
-      user_name: localStorage.getItem("data1"),
-      password: localStorage.getItem("data2"),
+      user_name: sessionStorage.getItem("data1"),
+      password: sessionStorage.getItem("data2"),
       avatar: avatar,
     };
     try {
@@ -105,7 +108,10 @@ function Setting() {
       <div className="avatar container">
         <form className=" mt-5 ">
           <div className="mb-3 ">
-            <label htmlFor="exampleInputEmail1" className="form-label">
+            <label
+              htmlFor="exampleInputEmail1"
+              className="form-label text-warning"
+            >
               Cập nhật ảnh đại diện
             </label>
             <input
@@ -130,7 +136,10 @@ function Setting() {
       <div className="avatar container">
         <form className="mt-5 ">
           <div className="mb-3 ">
-            <label htmlFor="exampleInputEmail1" className="form-label">
+            <label
+              htmlFor="exampleInputEmail1"
+              className="form-label text-warning"
+            >
               Cập nhật tên
             </label>
             <input
@@ -153,9 +162,52 @@ function Setting() {
         </form>
       </div>
       <div className="logout mt-5">
-        <button className="btn btn-primary " onClick={logout}>
+        <button
+          className="btn  btn-outline-danger"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
           Đăng Xuất
         </button>
+      </div>
+
+      {/* <!-- Modal --> */}
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog ">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Chắc chắn chưa?
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body text-danger">Đăng xuất khỏi tài khoản?</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Hủy
+              </button>
+              <button type="button" class="btn btn-danger" onClick={logout}>
+                Đăng xuất
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

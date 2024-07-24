@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./Login.css";
 
 function Login() {
@@ -38,9 +37,11 @@ function Login() {
       console.log("Login successful:", result);
 
       if (result.message) {
-        localStorage.setItem("data1", email);
-        localStorage.setItem("data2", password);
-        localStorage.setItem("cookie", "1");
+        sessionStorage.setItem("data1", email);
+        sessionStorage.setItem("data2", password);
+        sessionStorage.setItem("cookie", "1");
+        sessionStorage.setItem("is_admin", result.response.is_admin);
+
         setLoading(false);
         setInterval((window.location.href = "/"), 3000);
       } else {
@@ -97,7 +98,9 @@ function Login() {
             Submit
           </button>
         </form>
-        {isLoading && <div class="loader"></div>}
+        <div className="load__ani mt-5">
+          {isLoading && <div class="loader"></div>}
+        </div>
 
         {!check && (
           <div class="alert alert-danger mt-4" role="alert">
