@@ -25,6 +25,9 @@ function SideBar() {
       case "/love":
         setChoose("3");
         break;
+      case "/setting":
+        setChoose("4");
+        break;
       default:
         // Hành động mặc định nếu không khớp đường dẫn nào
         setChoose(0);
@@ -165,8 +168,22 @@ function SideBar() {
         </div>
         <div className="setting__box">
           <Link to="/setting" className="setting__link">
-            <span class="fa-solid fa-gear nav__icon"></span>
-            {!isClose && <div className="nav__title"> Setting</div>}
+            <span
+              class="fa-solid fa-gear nav__icon"
+              style={{
+                color: choose === "4" ? "white" : "rgba(255, 255, 255, 0.5)",
+              }}
+            ></span>
+            {!isClose && (
+              <div
+                className="nav__title"
+                style={{
+                  color: choose === "4" ? "white" : "rgba(255, 255, 255, 0.5)",
+                }}
+              >
+                Setting
+              </div>
+            )}
           </Link>
         </div>
       </div>
