@@ -102,11 +102,6 @@ function Setting() {
   };
   return (
     <div>
-      <div className="container mt-5">
-        <button className="btn btn-primary " onClick={logout}>
-          Đăng Xuất
-        </button>
-      </div>
       <form className="container mt-5 ">
         <div className="mb-3 ">
           <label htmlFor="exampleInputEmail1" className="form-label">
@@ -153,6 +148,11 @@ function Setting() {
           Submit
         </button>
       </form>
+      <div className="container mt-5">
+        <button className="btn btn-primary " onClick={logout}>
+          Đăng Xuất
+        </button>
+      </div>
     </div>
   );
 }
