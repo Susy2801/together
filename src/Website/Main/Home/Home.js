@@ -129,15 +129,20 @@ function Home() {
                         {user.nick_name}
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={() => {
-                        handleSetPartner(user._id);
-                      }}
-                    >
-                      Chọn 💖
-                    </button>
+
+                    {user._id === sessionStorage.getItem("_id") ? (
+                      <div></div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={() => {
+                          handleSetPartner(user._id);
+                        }}
+                      >
+                        Chọn 💖
+                      </button>
+                    )}
                   </div>
                 ))
               )}
