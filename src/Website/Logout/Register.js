@@ -43,9 +43,13 @@ function Register() {
     } finally {
       setEmail("");
       setPassword("");
-
       setLoading(false);
       setCheck(false);
+      if (msg) {
+        alert("Tạo tài khoản thành công!");
+      } else {
+        alert("Tài khoản đã tồn tại!");
+      }
     }
   };
 
@@ -94,7 +98,7 @@ function Register() {
           {isLoading && <div class="loader"></div>}
         </div>
 
-        {msg ? (
+        {/* {msg ? (
           <div class="alert alert-danger mt-4" role="alert">
             Tài khoản đã tồn tại!
           </div>
@@ -102,7 +106,7 @@ function Register() {
           <div class="alert alert-success mt-4" role="alert">
             Tạo tài khoản thành công!
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

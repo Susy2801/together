@@ -48,6 +48,13 @@ function Home() {
     }
   }
 
+  const userId = sessionStorage.getItem("_id");
+
+  const currentUser = users.find((user) => user._id === userId);
+  const otherUsers = users.filter((user) => user._id !== userId);
+
+  const sortedUsers = currentUser ? [currentUser, ...otherUsers] : otherUsers;
+
   return (
     <div className="home__container">
       {/* <!-- Button trigger modal --> */}
@@ -82,13 +89,26 @@ function Home() {
               ></button>
             </div>
             <div className="modal-body">
+              <div className="friend__box">
+                <div className="friend__img--box">
+                  <img
+                    className="img-thumbnail"
+                    alt="avatar"
+                    src={sortedUsers[0].avatar}
+                  />
+                </div>
+                <div className="friend__name--box">
+                  <div className="friends__name text-light">
+                    {sortedUsers[0].nick_name}
+                  </div>
+                </div>
+              </div>
               {isLoading ? (
                 <div className="friend__box">
                   <div className="loader"></div>
                 </div>
               ) : (
-                Array.isArray(users) &&
-                users.map((user, index) => (
+                sortedUsers.map((user, index) => (
                   <div className="friend__box" key={index}>
                     <div className="friend__img--box">
                       <img
@@ -121,10 +141,10 @@ function Home() {
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
-                Close
+                Bỏ qua
               </button>
               <button type="button" className="btn btn-primary">
-                Save changes
+                Được rùi cưới thui
               </button>
             </div>
           </div>

@@ -51,6 +51,7 @@ function SideBar() {
         });
         const data = await response.json();
         console.log(data);
+        sessionStorage.setItem("_id", data.response._id);
         setAvatar(data.response.avatar);
         setName(data.response.nick_name);
       } catch (error) {
