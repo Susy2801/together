@@ -225,22 +225,8 @@ function SideBar() {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
-            <span
-              class="fa-solid fa-user-group nav__icon"
-              style={{
-                color: choose === "4" ? "white" : "rgba(255, 255, 255, 0.5)",
-              }}
-            ></span>
-            {!isClose && (
-              <div
-                className="nav__title"
-                style={{
-                  color: choose === "4" ? "white" : "rgba(255, 255, 255, 0.5)",
-                }}
-              >
-                Partner
-              </div>
-            )}
+            <span class="fa-solid fa-user-group nav__icon"></span>
+            {!isClose && <div className="nav__title">Partner</div>}
           </Link>
           <div
             className="modal fade"
