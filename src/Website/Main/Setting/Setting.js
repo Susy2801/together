@@ -13,6 +13,7 @@ const getBase64 = (file) => {
 function Setting() {
   const [img, setImg] = useState();
   const [name, setName] = useState();
+  const [isLoading, setLoading] = useState(false);
 
   function logout() {
     sessionStorage.removeItem("cookie");
@@ -24,6 +25,7 @@ function Setting() {
 
   async function updateName(name, event) {
     event.preventDefault();
+    setLoading(true);
     const api = "https://susy-server.vercel.app/profile/name";
     const body = {
       user_name: sessionStorage.getItem("data1"),
@@ -41,6 +43,7 @@ function Setting() {
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
       window.location.reload();
     }
   }
@@ -130,6 +133,7 @@ function Setting() {
           >
             Submit
           </button>
+          {isLoading && <div className="loader"></div>}
         </form>
       </div>
 
@@ -159,6 +163,7 @@ function Setting() {
           >
             Submit
           </button>
+          {isLoading && <div className="loader"></div>}
         </form>
       </div>
       <div className="logout mt-5">
