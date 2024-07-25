@@ -89,20 +89,27 @@ function Home() {
               ></button>
             </div>
             <div className="modal-body">
-              <div className="friend__box">
-                <div className="friend__img--box">
-                  <img
-                    className="img-thumbnail"
-                    alt="avatar"
-                    src={sortedUsers[0].avatar}
-                  />
+              {/* {isLoading ? (
+                <div className="friend__box">
+                  <div className="loader"></div>
                 </div>
-                <div className="friend__name--box">
-                  <div className="friends__name text-light">
-                    {sortedUsers[0].nick_name}
+              ) : (
+                <div className="friend__box">
+                  <div className="friend__img--box">
+                    <img
+                      className="img-thumbnail"
+                      alt="avatar"
+                      src={sortedUsers[0].avatar}
+                    />
+                  </div>
+                  <div className="friend__name--box">
+                    <div className="friends__name text-light">
+                      {sortedUsers[0].nick_name}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )} */}
+
               {isLoading ? (
                 <div className="friend__box">
                   <div className="loader"></div>
