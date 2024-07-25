@@ -171,7 +171,7 @@ function Setting() {
           className="btn  btn-outline-danger"
           type="button"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#logoutModal"
         >
           Đăng Xuất
         </button>
@@ -180,7 +180,7 @@ function Setting() {
       {/* <!-- Modal --> */}
       <div
         class="modal fade"
-        id="exampleModal"
+        id="logoutModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
