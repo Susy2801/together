@@ -5,11 +5,13 @@ import "./Register.css";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(true);
+  const [isLoading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const handleRegister = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     const api = "https://susy-server.vercel.app/create";
 
     const data = {
@@ -33,18 +35,17 @@ function Register() {
 
       // Parse the JSON response
       const result = await response.json();
+      setMsg(result.message);
 
-      // Handle the result here (e.g., display a message or redirect)
       console.log("Login successful:", result);
-      alert(result.message);
-
-      // Example: Redirect to another page
-      // window.location.href = '/dashboard';
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     } finally {
       setEmail("");
       setPassword("");
+
+      setLoading(false);
+      setCheck(false);
     }
   };
 
@@ -62,7 +63,10 @@ function Register() {
               className="form-control"
               id="exampleInputEmail1"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setCheck(true);
+              }}
               aria-describedby="emailHelp"
               required
             />
@@ -86,6 +90,19 @@ function Register() {
             Submit
           </button>
         </form>
+        <div className="load__ani mt-5">
+          {isLoading && <div class="loader"></div>}
+        </div>
+
+        {msg ? (
+          <div class="alert alert-danger mt-4" role="alert">
+            Tài khoản đã tồn tại!
+          </div>
+        ) : (
+          <div class="alert alert-success mt-4" role="alert">
+            Tạo tài khoản thành công!
+          </div>
+        )}
       </div>
     </div>
   );

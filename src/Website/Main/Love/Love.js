@@ -155,7 +155,7 @@ function Love() {
       <div className="love__box">
         <div className="count__box">
           <div className="count__day">
-            <div className="count__title"> BEEN LOVE</div>
+            <div className="count__title"> BEEN LOVE </div>
             <div className="count__info">
               <div className="left__info">
                 <div>{name}</div>

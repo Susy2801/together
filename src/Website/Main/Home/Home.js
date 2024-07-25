@@ -57,7 +57,7 @@ function Home() {
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
-        Bạn bè
+        Tìm người yêu
       </button>
 
       {/* <!-- Modal --> */}
@@ -98,7 +98,9 @@ function Home() {
                       />
                     </div>
                     <div className="friend__name--box">
-                      <div className="friends__name">{user.nick_name}</div>
+                      <div className="friends__name text-light">
+                        {user.nick_name}
+                      </div>
                     </div>
                     <button
                       type="button"
@@ -107,7 +109,7 @@ function Home() {
                         handleSetPartner(user._id);
                       }}
                     >
-                      💖
+                      Chọn 💖
                     </button>
                   </div>
                 ))
