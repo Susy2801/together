@@ -12,3 +12,8 @@
 .logout {
   text-align: center;
 }
+
+.loading__screen {
+  display: flex;
+  justify-content: center;
+}

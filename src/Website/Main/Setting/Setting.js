@@ -133,7 +133,6 @@ function Setting() {
           >
             Submit
           </button>
-          {isLoading && <div className="loader"></div>}
         </form>
       </div>
 
@@ -163,7 +162,6 @@ function Setting() {
           >
             Submit
           </button>
-          {isLoading && <div className="loader"></div>}
         </form>
       </div>
       <div className="logout mt-5">
@@ -175,6 +173,9 @@ function Setting() {
         >
           Đăng Xuất
         </button>
+        <div className="avatar container mt-5 loading__screen">
+          {isLoading && <div className="loader"></div>}
+        </div>
       </div>
 
       {/* <!-- Modal --> */}
