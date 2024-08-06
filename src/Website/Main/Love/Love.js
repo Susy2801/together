@@ -116,7 +116,6 @@ function Love() {
         const data = await response.json();
         setPartnerAvatar(data.response.avatar);
         setPartnerName(data.response.nick_name);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
