@@ -38,8 +38,6 @@ function Login() {
 
       if (result.message) {
         sessionStorage.setItem("id", result.response._id);
-        sessionStorage.setItem("data1", email);
-        sessionStorage.setItem("data2", password);
         sessionStorage.setItem("cookie", "1");
         sessionStorage.setItem("is_admin", result.response.is_admin);
 
@@ -58,7 +56,7 @@ function Login() {
   return (
     <div className="login__container">
       <div className="container form">
-        <h1> Đăng nhập</h1>
+        <h1> Đăng Nhập</h1>
         <form onSubmit={handleLogin}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
