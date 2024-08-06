@@ -28,8 +28,7 @@ function Setting() {
     setLoading(true);
     const api = "https://susy-server.vercel.app/profile/name";
     const body = {
-      user_name: sessionStorage.getItem("data1"),
-      password: sessionStorage.getItem("data2"),
+      user_id: sessionStorage.getItem("id"),
       nick_name: name,
     };
     try {
@@ -51,8 +50,7 @@ function Setting() {
   async function updateAvatar(avatar) {
     const api = "https://susy-server.vercel.app/profile/avatar";
     const body = {
-      user_name: sessionStorage.getItem("data1"),
-      password: sessionStorage.getItem("data2"),
+      user_id: sessionStorage.getItem("id"),
       avatar: avatar,
     };
     try {
