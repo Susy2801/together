@@ -52,7 +52,6 @@ function SideBar() {
           body: JSON.stringify(body),
         });
         const data = await response.json();
-        console.log(data);
         setAvatar(data.response.avatar);
         setName(data.response.nick_name);
       } catch (error) {

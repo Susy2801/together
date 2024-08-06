@@ -89,7 +89,6 @@ function Love() {
           body: JSON.stringify(body),
         });
         const data = await response.json();
-        console.log(data);
         sessionStorage.setItem("partner", data.response.partner_id);
         setAvatar(data.response.avatar);
         setName(data.response.nick_name);
