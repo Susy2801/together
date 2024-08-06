@@ -41,8 +41,7 @@ function SideBar() {
     async function getProfile() {
       const api = "https://susy-server.vercel.app/profile";
       const body = {
-        user_name: sessionStorage.getItem("data1"),
-        password: sessionStorage.getItem("data2"),
+        user_id: sessionStorage.getItem("id"),
       };
       try {
         const response = await fetch(api, {
@@ -54,7 +53,6 @@ function SideBar() {
         });
         const data = await response.json();
         console.log(data);
-        sessionStorage.setItem("_id", data.response._id);
         setAvatar(data.response.avatar);
         setName(data.response.nick_name);
       } catch (error) {
@@ -104,8 +102,7 @@ function SideBar() {
     setLoading(true);
     const api = "https://susy-server.vercel.app/profile/set_partner";
     const body = {
-      user_name: sessionStorage.getItem("data1"),
-      password: sessionStorage.getItem("data2"),
+      user_id: sessionStorage.getItem("id"),
       partner_id: id,
     };
     try {

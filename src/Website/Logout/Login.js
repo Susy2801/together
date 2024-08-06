@@ -37,6 +37,7 @@ function Login() {
       console.log("Login successful:", result);
 
       if (result.message) {
+        sessionStorage.setItem("id", result.response._id);
         sessionStorage.setItem("data1", email);
         sessionStorage.setItem("data2", password);
         sessionStorage.setItem("cookie", "1");

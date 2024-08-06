@@ -78,8 +78,7 @@ function Love() {
     async function getProfile() {
       const api = "https://susy-server.vercel.app/profile";
       const body = {
-        user_name: sessionStorage.getItem("data1"),
-        password: sessionStorage.getItem("data2"),
+        user_id: sessionStorage.getItem("id"),
       };
       try {
         const response = await fetch(api, {
